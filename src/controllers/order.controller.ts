@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { connect,connect_grostep } from '../database';
+import { connect,connect_grostep,connect_aws_grostep } from '../database';
 import { stat } from 'fs';
 
 export async function fetchOrderDetailsById(req: Request, res: Response) {
-    const conn = await connect_grostep();
+    const conn = await connect_aws_grostep();
     let sql = `CALL GET_ORDER_INFO(?)`;
     await conn.query(sql,[+req.params.orderId], 
         function (err: any, orderData: any) {

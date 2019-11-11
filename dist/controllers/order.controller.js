@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../database");
 function fetchOrderDetailsById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield database_1.connect_grostep();
+        const conn = yield database_1.connect_aws_grostep();
         let sql = `CALL GET_ORDER_INFO(?)`;
         yield conn.query(sql, [+req.params.orderId], function (err, orderData) {
             if (err) {
