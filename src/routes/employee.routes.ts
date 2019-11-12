@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { validateEmployee } from '../controllers/employee.controller';
 const router = Router();
 
-router.route('/')
+// router.route('/')
     // .get(getPosts)
     // .post(createPosts);
 
