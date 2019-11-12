@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const employee_controller_1 = require("../controllers/employee.controller");
 const router = express_1.Router();
-router.route('/');
+// router.route('/')
 // .get(getPosts)
 // .post(createPosts);
 router.route('/validate')
