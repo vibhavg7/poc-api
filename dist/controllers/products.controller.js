@@ -20,11 +20,16 @@ function getProducts(req, res) {
         let sql = `CALL GET_PRODUCTSINFO(?,?,?)`;
         yield conn.query(sql, [+req.body.page_number, +req.body.page_size, req.body.filterBy], function (err, products) {
             if (err) {
-                console.log("error: ", err);
+                // console.log("error: ", err);
+                res.json({
+                    "message": "Problem fetching Products list ",
+                    "status": 400,
+                    "product_id": 0
+                });
             }
             else {
                 res.json({
-                    "message": "Product added",
+                    "message": "Product list",
                     "products": products[0],
                     "products_total_count": products[1][0]
                 });
@@ -39,7 +44,12 @@ function searchProductByName(req, res) {
         let sql = `CALL FILTER_PRODUCTS_BYNAME(?)`;
         yield conn.query(sql, [req.params.productName], function (err, products) {
             if (err) {
-                console.log("error: ", err);
+                // console.log("error: ", err);
+                res.json({
+                    "message": "product information not found",
+                    "status": 400,
+                    "product_id": 0
+                });
             }
             else {
                 res.json({

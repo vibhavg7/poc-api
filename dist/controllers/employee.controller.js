@@ -10,10 +10,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../database");
-// import { Customer } from '../interfaces/Product';
+function getEmployees(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const conn = yield database_1.connect_aws_grostep();
+        let sql = `CALL GET_ALL_Employees(?,?,?)`;
+        yield conn.query(sql, [+req.body.page_number, +req.body.page_size, req.body.filterBy], function (err, employees) {
+            if (err) {
+                // console.log("error: ", err);
+                res.json({
+                    "status": 401,
+                    "message": "Employee Details not found",
+                    "employeeData": employees[0]
+                });
+            }
+            else {
+                res.json({
+                    "message": "Employees list",
+                    "employees": employees[0],
+                    "employees_total_count": employees[1][0]
+                });
+            }
+        });
+    });
+}
+exports.getEmployees = getEmployees;
 function validateEmployee(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield database_1.connect_grostep();
+        const conn = yield database_1.connect_aws_grostep();
         let sql = `CALL validateEmployee(?,?)`;
         yield conn.query(sql, [req.body.user_name, req.body.password], function (err, employeeData) {
             if (err) {

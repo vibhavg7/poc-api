@@ -1,22 +1,43 @@
 import { Request, Response } from 'express';
-import { connect,connect_grostep } from '../database';
-// import { Customer } from '../interfaces/Product';
+import { connect, connect_grostep, connect_aws_grostep } from '../database';
 
-export async function validateEmployee(req: Request, res: Response) {    
-    const conn = await connect_grostep();
+export async function getEmployees(req: Request, res: Response) {
+    const conn = await connect_aws_grostep();
+    let sql = `CALL GET_ALL_Employees(?,?,?)`;
+    await conn.query(sql, [+req.body.page_number, +req.body.page_size, req.body.filterBy], function (err: any, employees: any) {
+        if (err) {
+            // console.log("error: ", err);
+            res.json({
+                "status": 401,
+                "message": "Employee Details not found",
+                "employeeData": employees[0]
+            });
+        }
+        else {
+            res.json({
+                "message": "Employees list",
+                "employees": employees[0],
+                "employees_total_count": employees[1][0]
+            });
+        }
+    });
+}
+
+export async function validateEmployee(req: Request, res: Response) {
+    const conn = await connect_aws_grostep();
     let sql = `CALL validateEmployee(?,?)`;
-    await conn.query(sql,[req.body.user_name,req.body.password], function (err: any, employeeData: any) {
+    await conn.query(sql, [req.body.user_name, req.body.password], function (err: any, employeeData: any) {
         if (err) {
             res.json({
-                "status":401,
-                "message":"Employee Details not found",
+                "status": 401,
+                "message": "Employee Details not found",
                 "employeeData": employeeData[0]
             });
         }
         else {
             res.json({
-                "status":200,
-                "message":"Employee Details",
+                "status": 200,
+                "message": "Employee Details",
                 "employeeData": employeeData[0]
             });
         }

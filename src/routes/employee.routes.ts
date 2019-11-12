@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { validateEmployee } from '../controllers/employee.controller';
+import { validateEmployee,getEmployees } from '../controllers/employee.controller';
 const router = Router();
 
-// router.route('/')
-    // .get(getPosts)
+router.route('/')
+    .post(getEmployees);
     // .post(createPosts);
 
 router.route('/validate')

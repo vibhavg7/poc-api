@@ -11,11 +11,16 @@ export async function getProducts(req: Request, res: Response) {
     let sql = `CALL GET_PRODUCTSINFO(?,?,?)`;
     await conn.query(sql, [+req.body.page_number, +req.body.page_size,req.body.filterBy], function (err: any, products: any) {
         if (err) {
-            console.log("error: ", err);
+            // console.log("error: ", err);
+            res.json({
+                "message": "Problem fetching Products list ",
+                "status": 400,
+                "product_id": 0
+            });
         }
         else {
             res.json({
-                "message": "Product added",
+                "message": "Product list",
                 "products": products[0],
                 "products_total_count": products[1][0]
             });
@@ -30,7 +35,12 @@ export async function searchProductByName(req: Request, res: Response) {
     await conn.query(sql,[req.params.productName], 
         function (err: any, products: any) {
         if (err) {
-            console.log("error: ", err);
+            // console.log("error: ", err);
+            res.json({
+                "message": "product information not found",
+                "status": 400,
+                "product_id": 0
+            });
         }
         else {
             res.json({
