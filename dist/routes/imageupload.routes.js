@@ -10,7 +10,7 @@ const category_controller_1 = require("../controllers/category.controller");
 const stores_controller_1 = require("../controllers/stores.controller");
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './src/uploads');
+        cb(null, './dist/uploads');
     },
     filename: function (req, file, cb) {
         // console.log(file.originalname.substr(0, file.originalname.indexOf('.')));

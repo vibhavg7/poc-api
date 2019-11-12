@@ -9,7 +9,7 @@ import { updateStoreImages } from '../controllers/stores.controller';
 
 var storage = multer.diskStorage({
     destination: function (req: any, file: any, cb: any) {
-        cb(null, './src/uploads');
+        cb(null, './dist/uploads');
     },
     filename: function (req: any, file: any, cb: any) {
         // console.log(file.originalname.substr(0, file.originalname.indexOf('.')));
