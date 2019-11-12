@@ -11,7 +11,7 @@ var grostepdb_config = {
 
 var grostepawsdb_config = {
     connectionLimit: 1000,
-    host: 'grostep.cce5kiug4ajr.us-east-2.rds.amazonaws.com',
+    host: 'vibhavg91.cce5kiug4ajr.us-east-2.rds.amazonaws.com',
     user: 'root',
     password: 'password',
     database: 'grostep'
