@@ -206,8 +206,10 @@ function updateProductImages(productId, imageUrl, req, res) {
                 });
             }
             else {
+                // return res.json({ 'image_url': req.file.location });
                 res.json({
                     "status": 200,
+                    'image_url': req.file.location,
                     "message": "Product detail",
                     "product": updatedProduct[0][0]
                 });

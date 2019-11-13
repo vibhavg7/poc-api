@@ -191,8 +191,10 @@ export async function updateProductImages(productId:any,imageUrl:any,req:any,res
             })
         }
         else {
+            // return res.json({ 'image_url': req.file.location });
             res.json({
                 "status":200,
+                'image_url': req.file.location,
                 "message":"Product detail",
                 "product": updatedProduct[0][0]
             });

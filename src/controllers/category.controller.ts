@@ -169,11 +169,11 @@ export async function updateStoreCategory(req: Request, res: Response) {
         });
 }
 
-export async function updateStoreCategoryImages(req:any,res:any) {
+export async function updateStoreCategoryImages(categoryId:any,imageUrl:any,req:any,res:any) {
     const conn = await connect_aws_grostep();
     let sql = `CALL UPDATE_STORE_CATEGORY(?,?,?)`;
-    let storeCategoryId = +req.body.store_category_id;
-    let image_url = req.body.image_url;    
+    let storeCategoryId = +categoryId;
+    let image_url = imageUrl;    
     let status = 1;
     await conn.query(sql, [storeCategoryId,image_url,status],
                      function (err: any, updatedCategories: any) {     
@@ -188,6 +188,7 @@ export async function updateStoreCategoryImages(req:any,res:any) {
         else {
             res.json({
                 "status":200,
+                'image_url': req.file.location,
                 "message":"category detail",
                 "product": updatedCategories[0][0]
             });

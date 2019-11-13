@@ -251,11 +251,11 @@ export async function updateStore(req: Request, res: Response) {
     });
 }
 
-export async function updateStoreImages(req:any,res:any) {
+export async function updateStoreImages(store_id:any,imageUrl:any,req:any,res:any) {
     const conn = await connect_aws_grostep();
     let sql = `CALL UPDATE_STORE_IMAGES(?,?,?)`;
-    let storeId = +req.body.store_id;
-    let image_url = req.body.image_url;    
+    let storeId = +store_id;
+    let image_url = imageUrl;    
     let status = 1;
     await conn.query(sql, [storeId,image_url,status],
                      function (err: any, updatedStore: any) {     

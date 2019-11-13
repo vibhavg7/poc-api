@@ -258,12 +258,12 @@ function updateStore(req, res) {
     });
 }
 exports.updateStore = updateStore;
-function updateStoreImages(req, res) {
+function updateStoreImages(store_id, imageUrl, req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const conn = yield database_1.connect_aws_grostep();
         let sql = `CALL UPDATE_STORE_IMAGES(?,?,?)`;
-        let storeId = +req.body.store_id;
-        let image_url = req.body.image_url;
+        let storeId = +store_id;
+        let image_url = imageUrl;
         let status = 1;
         yield conn.query(sql, [storeId, image_url, status], function (err, updatedStore) {
             if (err) {

@@ -178,12 +178,12 @@ function updateStoreCategory(req, res) {
     });
 }
 exports.updateStoreCategory = updateStoreCategory;
-function updateStoreCategoryImages(req, res) {
+function updateStoreCategoryImages(categoryId, imageUrl, req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const conn = yield database_1.connect_aws_grostep();
         let sql = `CALL UPDATE_STORE_CATEGORY(?,?,?)`;
-        let storeCategoryId = +req.body.store_category_id;
-        let image_url = req.body.image_url;
+        let storeCategoryId = +categoryId;
+        let image_url = imageUrl;
         let status = 1;
         yield conn.query(sql, [storeCategoryId, image_url, status], function (err, updatedCategories) {
             if (err) {
@@ -197,6 +197,7 @@ function updateStoreCategoryImages(req, res) {
             else {
                 res.json({
                     "status": 200,
+                    'image_url': req.file.location,
                     "message": "category detail",
                     "product": updatedCategories[0][0]
                 });
