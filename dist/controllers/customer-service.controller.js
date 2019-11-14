@@ -29,22 +29,6 @@ function fetchAllCustomers(req, res) {
     });
 }
 exports.fetchAllCustomers = fetchAllCustomers;
-function getCustomers(req, res) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield database_1.connect_grostep();
-        let sql = `CALL GET_CUSTOMERS(?,?)`;
-        yield conn.query(sql, [req.params.page_number, req.params.page_size], function (err, customers) {
-            if (err) {
-                console.log("error: ", err);
-            }
-            else {
-                console.log(JSON.stringify(customers));
-                res.json(customers);
-            }
-        });
-    });
-}
-exports.getCustomers = getCustomers;
 function createCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const newCustomer = req.body;

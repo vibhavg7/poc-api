@@ -15,6 +15,4 @@ router.route('/customerinfo/:customerId')
     .put(customer_service_controller_1.updateCustomer)
     .delete(customer_service_controller_1.deleteCustomer);
 // .post(createCustomer);
-// router.route('/:page_number/:page_size')
-//     .get(getCustomers)
 exports.default = router;
