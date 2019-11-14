@@ -12,7 +12,7 @@ aws.config.update({
 const s3 = new aws.S3();
 
 const fileFilter = (req:any,file:any,cb:any) =>{
-  console.log(process.env.secretAccessKey);
+  // console.log(process.env.secretAccessKey);
     if((file.mimetype === 'image/jpeg') ||(file.mimetype === 'image/png')){
         cb(null,true);
     }
@@ -28,7 +28,7 @@ export const uploadImage = multer({
     bucket: 'image-upload-grostep',
     acl: 'public-read',
     metadata: function (req:any, file:any, cb:any) {
-      console.log(process.env.secretAccessKey);
+      // console.log(process.env.secretAccessKey);
       cb(null, {fieldName: 'TESTING_META_DETA!'});
     },
     key: function (req:any, file:any, cb:any) {
