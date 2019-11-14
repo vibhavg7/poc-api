@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getCustomers, createCustomer, getCustomer, updateCustomer, deleteCustomer, fetchAllCustomers,fetchCustomerOrdersById } from '../controllers/customer-service.controller';
+import { createCustomer, getCustomer, updateCustomer, deleteCustomer, fetchAllCustomers,fetchCustomerOrdersById } from '../controllers/customer-service.controller';
 const router = Router();
 
 router.route('/')
@@ -18,6 +18,4 @@ router.route('/customerinfo/:customerId')
     .delete(deleteCustomer);
 // .post(createCustomer);
 
-// router.route('/:page_number/:page_size')
-//     .get(getCustomers)
 export default router;

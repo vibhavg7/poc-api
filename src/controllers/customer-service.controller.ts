@@ -21,20 +21,6 @@ export async function fetchAllCustomers(req: Request, res: Response) {
     });
 }
 
-export async function getCustomers(req: Request, res: Response) {
-    const conn = await connect_grostep();
-    let sql = `CALL GET_CUSTOMERS(?,?)`;
-    await conn.query(sql,[req.params.page_number,req.params.page_size], function (err: any, customers: any) {
-        if (err) {
-            console.log("error: ", err);
-        }
-        else {
-            console.log(JSON.stringify(customers));
-            res.json(customers);
-        }
-    });
-}
-
 export async function createCustomer(req: Request, res: Response) {
     const newCustomer: Customer = req.body;
     const conn = await connect_aws_grostep();
